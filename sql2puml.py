@@ -40,7 +40,14 @@ def Connect(driverOverride, server, host, port, dbname, username, password):
                 'Server=' + host + ';Port=' + port + ';' + 'Database=' + dbname +
                 ';User=' + username + ';Password=' + password + ';Option=3;'
                 )
-    
+    elif server == 'postgresql':
+        driver = '{PostgreSQL Unicode};'
+        if driverOverride != '':
+            driver = driverOverride
+        connstr = ('Driver=' + driver + ';'
+                'Server=' + host + ';Port=' + port + ';' + 'Database=' + dbname +
+                ';UID=' + username + ';PWD=' + password + ';'
+                )
     connection = pyodbc.connect(connstr)
     return connection
 
